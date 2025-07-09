@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.logoName {
+  font-size: 1.2rem;
+  color: #4a4a4a !important;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.2rem;
+}
+
+.text-header-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #4a4a4a !important;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.2rem;
+}
+
+.page-content {
+  flex: 1;
+}
+
+.carousel .carousel-control-prev,
+.carousel .carousel-control-next {
+  width: 50px; /* wider clickable area */
+  height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(173, 169, 169, 0.4); /* dark semi-transparent background */
+  border-radius: 20%;
+  color: white;
+  opacity: 90;
+  margin: 0 10px; /* space between controls */
+}
+
+.carousel .carousel-control-prev-icon,
+.carousel .carousel-control-next-icon {
+  background-size: 80% 80%;
+  filter: invert(1); /* makes the white arrow visible on dark background */
+}
+
+.carousel .carousel-control-prev:hover,
+.carousel .carousel-control-next:hover {
+  background-color: rgba(156, 149, 149, 0.6);
+}
+
+.category-card {
+  border-radius: 0 !important;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.03); /* Slight zoom */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+  z-index: 2;
+}
