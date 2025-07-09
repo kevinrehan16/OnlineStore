@@ -41,10 +41,52 @@ const products = [
   },
   {
     id: 6,
-    name: 'Gaming Mouse',
+    name: 'Fashion men',
     price: 799,
     image: '/assets/images/fashion.jpg',
     description: 'Stylish and comfortable gaming mouse with customizable buttons.',
+  },
+  {
+    id: 7,
+    name: 'Bike',
+    price: 799,
+    image: '/assets/images/bike.jpg',
+    description: 'High-performance bike for city commuting and fitness.',
+  },
+  {
+    id: 8,
+    name: 'Camera',
+    price: 799,
+    image: '/assets/images/camera.jpg',
+    description: 'High-resolution camera with 4K video recording capabilities.',
+  },
+  {
+    id: 9,
+    name: 'Cellphone',
+    price: 799,
+    image: '/assets/images/cellphone.jpg',
+    description: 'Latest smartphone with advanced features and sleek design.',
+  },
+  {
+    id: 10,
+    name: 'Dress',
+    price: 799,
+    image: '/assets/images/dress.jpg',
+    description: 'Elegant dress for special occasions.',
+  },
+  {
+    id: 11,
+    name: 'Laptop',
+    price: 799,
+    image: '/assets/images/laptop.jpg',
+    description: 'Powerful laptop with high performance for gaming and work.',
+  },
+  {
+    id: 12,
+    name: 'Short',
+    price: 799,
+    image: '/assets/images/short.jpg',
+    description: 'Comfortable shorts for casual wear.',
   },
 ];
 

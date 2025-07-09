@@ -24,7 +24,7 @@ const ProductCard = ({ id, name, price, image, rate }) => {
   };
 
   return (
-    <Card className="h-100 shadow-sm" style={{ borderRadius: 0 }}>
+    <Card className="h-100 product-card" style={{ borderRadius: 0 }}>
       <Link to={`/product/${id}`} className='text-decoration-none text-dark'>
         <Card.Img
           variant="top"
@@ -34,7 +34,8 @@ const ProductCard = ({ id, name, price, image, rate }) => {
             objectFit: 'cover',
             height: '200px',
             width: '100%',
-            backgroundColor: '#f8f9fa'  // optional: adds a clean background
+            backgroundColor: '#f8f9fa',
+            borderRadius: 0
           }}
         />
         <Card.Body className="d-flex flex-column">

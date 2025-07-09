@@ -74,3 +74,16 @@ html, body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
   z-index: 2;
 }
+
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  background-color: #fefefe;
+  border: 1px solid #ddd;
+}
