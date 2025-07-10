@@ -45,9 +45,9 @@ html, body {
   height: 50px;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(173, 169, 169, 0.4); /* dark semi-transparent background */
+  background-color: rgba(72, 72, 72, 0.4); /* dark semi-transparent background */
   border-radius: 20%;
-  color: white;
+  color: #fff !important;
   opacity: 90;
   margin: 0 10px; /* space between controls */
 }
@@ -55,12 +55,13 @@ html, body {
 .carousel .carousel-control-prev-icon,
 .carousel .carousel-control-next-icon {
   background-size: 80% 80%;
-  filter: invert(1); /* makes the white arrow visible on dark background */
+  /* filter: invert(1); makes the white arrow visible on dark background */
+  color: #fff !important;
 }
 
 .carousel .carousel-control-prev:hover,
 .carousel .carousel-control-next:hover {
-  background-color: rgba(156, 149, 149, 0.6);
+  background-color: rgba(129, 10, 10, 0.6);
 }
 
 .category-card {
@@ -73,6 +74,13 @@ html, body {
   transform: scale(1.03); /* Slight zoom */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
   z-index: 2;
+  border: 1px solid #b22e2e;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 20px;
+  /* border-radius: 10px; */
 }
 
 .product-card {
@@ -85,5 +93,5 @@ html, body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   z-index: 1;
   background-color: #fefefe;
-  border: 1px solid #ddd;
+  border: 1px solid #b22e2e;
 }

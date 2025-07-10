@@ -19,7 +19,7 @@ const CategoryBanner = () => {
   return (
     <Container className='my-5'>
       <Row>
-        <h2 className='g-0 text-header-title'><i class="bi bi-tags-fill text-danger"></i> Categories</h2>
+        <h2 className='g-0 text-header-title'><i className="bi bi-tags-fill text-danger"></i> Categories</h2>
         {Categories.map((category, index) => (
           <Col className='g-0' key={index} xs={6} sm={4} md={2}>
             <Card className="text-center category-card h-100 p-1 pt-4" style={{ borderRadius: 0 }}>

@@ -98,10 +98,10 @@ const Home = () => {
       <CategoryBanner />
       <Row className="text-left my-5">
         <Col>
-          <h2 className='g-0 text-header-title'><i class="bi bi-bag-heart-fill text-danger"></i> Just For You</h2>
+          <h2 className='g-0 text-header-title'><i className="bi bi-bag-heart-fill text-danger"></i> Just For You</h2>
           <Row className="g-2 justify-content-center">
             {products.map((product, index) => (
-              <Col key={product.id} xs={12} sm={6} md={6} lg={2} className="mb-3">
+              <Col key={product.id} xs={6} sm={4} md={3} lg={2} className="mb-3">
                 <ProductCard key={index}
                   id={product.id}
                   name={product.name}

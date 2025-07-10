@@ -12,10 +12,10 @@ const CarouselBanner = () => {
               src="/assets/images/banners/banner1.jpg"
               alt="First slide"
             />
-            <Carousel.Caption>
+            {/* <Carousel.Caption>
               <h3>Big Sale</h3>
               <p>Up to 50% off on selected items!</p>
-            </Carousel.Caption>
+            </Carousel.Caption> */}
           </Carousel.Item>
 
           <Carousel.Item>
@@ -24,10 +24,10 @@ const CarouselBanner = () => {
               src="/assets/images/banners/banner2.jpg"
               alt="Second slide"
             />
-            <Carousel.Caption>
+            {/* <Carousel.Caption>
               <h3>New Arrivals</h3>
               <p>Check out the latest gadgets in store.</p>
-            </Carousel.Caption>
+            </Carousel.Caption> */}
           </Carousel.Item>
 
           <Carousel.Item>
@@ -36,10 +36,10 @@ const CarouselBanner = () => {
               src="/assets/images/banners/banner3.jpg"
               alt="Third slide"
             />
-            <Carousel.Caption>
+            {/* <Carousel.Caption>
               <h3>Shop Smart</h3>
               <p>Unbeatable prices every day.</p>
-            </Carousel.Caption>
+            </Carousel.Caption> */}
           </Carousel.Item>
         </Carousel>
       </Col>
