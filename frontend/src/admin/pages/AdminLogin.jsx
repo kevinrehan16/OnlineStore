@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Card, Container, Row, Col, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../../assets/logo2.jpg'
+import axios from 'axios';
+import Logo from '../../assets/logo.png'
 import { useAdminAuth } from '../context/AdminAuthContext';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
   const navigate = useNavigate();
   const { isAdminAuthenticated, login } = useAdminAuth();
 
@@ -16,14 +19,23 @@ const AdminLogin = () => {
     }
   }, [isAdminAuthenticated, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your real authentication logic here
-    if (email === 'kevin@gmail.com' && password === 'kevin123') {
+    setError('');
+    
+    try {
+      const { data } = await axios.post(`${API_URL}/api/admin/login`, {
+        email,
+        password,
+      });
+      sessionStorage.setItem('admin_token', data.token);
+
       login();
       navigate('/mystore/admin/dashboard');
-    } else {
-      alert('Invalid credentials');
+      
+    } catch (err) {
+      const message = err.response?.data?.message || 'Login failed';
+      setError(message);
     }
   };
 
@@ -43,6 +55,9 @@ const AdminLogin = () => {
                 />
                 <h4 className="fw-bold text-danger">My Store</h4>
               </div>
+
+              {error && <Alert variant="danger">{error}</Alert>}
+
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                   <Form.Label>Email address</Form.Label>

@@ -1,11 +1,19 @@
-import Container from 'react-bootstrap/Container';
+import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Logo from '../../assets/logo.png' // Adjust the path as necessary;
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAdminAuth } from '../context/AdminAuthContext';
 
 function AdminNavbar() {
+  const navigate = useNavigate();
+  const { logout } = useAdminAuth();
+
+  const handleLogout = () => {
+    localStorage.removeItem('admin_token');
+    logout();
+    navigate('/mystore/admin/login');
+  };
+
   return (
     <Navbar collapseOnSelect expand="md" className="bg-danger shadow-lg p-2" sticky="top">
       <Navbar className="ms-2">
@@ -13,8 +21,16 @@ function AdminNavbar() {
       </Navbar>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="ms-auto">
-          <Nav.Link href="#deets" className="text-white">Kevin Macandog</Nav.Link>
+        <Nav className="ms-auto align-items-center">
+          <Nav.Item className="d-flex align-items-center gap-2 text-white">
+            <span>Kevin Macandog</span>
+            <i
+              className="bi bi-box-arrow-right fs-5 cursor-pointer"
+              onClick={handleLogout}
+              title="Logout"
+              role="button"
+            ></i>
+          </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

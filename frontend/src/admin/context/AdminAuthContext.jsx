@@ -5,17 +5,16 @@ const AdminAuthContext = createContext();
 export const AdminAuthProvider = ({ children }) => {
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(() => {
     // load from localStorage initially
-    return localStorage.getItem('admin_logged_in') === 'true';
+    return !!sessionStorage.getItem('admin_token');
   });
 
   const login = () => {
     setIsAdminAuthenticated(true);
-    localStorage.setItem('admin_logged_in', 'true');
   };
 
   const logout = () => {
+    sessionStorage.removeItem('admin_logged_in');
     setIsAdminAuthenticated(false);
-    localStorage.removeItem('admin_logged_in');
   };
 
   return (

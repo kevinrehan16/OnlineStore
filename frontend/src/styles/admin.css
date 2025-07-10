@@ -89,4 +89,37 @@
   object-fit: cover;
 }
 
+.module-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 20px;
+}
+
+.module-title .bi {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--red);
+  margin-bottom: 20px;
+}
+
+.card-top {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+input {
+  border: 1px solid var(--dark-grey);
+  border-radius: 0 !important;
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+button {
+  border-radius: 0 !important;
+  font-size: 1rem !important;
+  font-weight: 400;
+}
 /* END Admin CSS */
