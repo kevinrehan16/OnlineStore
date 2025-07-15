@@ -7,11 +7,13 @@ import bodyParser from 'body-parser';
 // APPLICATION ROUTES
 import productRoutes from './routes/productRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import helmet from 'helmet'; // Security middleware, protects against common vulnerabilities, Cross-Site Scripting (XSS), Clickjacking, MIME sniffing
 
 dotenv.config();
 connectDB();
 
 const app = express();
+app.use(helmet()); // Security middleware
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

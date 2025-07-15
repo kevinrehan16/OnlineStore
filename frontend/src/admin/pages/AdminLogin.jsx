@@ -6,6 +6,8 @@ import Logo from '../../assets/logo.png'
 import { useAdminAuth } from '../context/AdminAuthContext';
 
 const AdminLogin = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -29,6 +31,7 @@ const AdminLogin = () => {
         password,
       });
       sessionStorage.setItem('admin_token', data.token);
+      sessionStorage.setItem('admin_login', JSON.stringify(data.user));
 
       login();
       navigate('/mystore/admin/dashboard');

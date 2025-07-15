@@ -21,7 +21,7 @@ const Products = () => {
   }
   
   return (
-    <Container className="my-3">
+    <Container className="my-3" fluid>
       <Row>
         <Col>
           <h3 className='module-title'>

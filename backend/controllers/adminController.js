@@ -11,14 +11,14 @@ export const registerAdmin = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-  const { email, password } = req.body;
+  const { email, firstname, lastname, password } = req.body;
 
   try {
     const existingAdmin = await Admin.findOne({ email });
     if (existingAdmin) return res.status(400).json({ message: 'Admin already exists' });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newAdmin = new Admin({ email, password: hashedPassword });
+    const newAdmin = new Admin({ email, firstname, lastname, password: hashedPassword });
     await newAdmin.save();
 
     const token = generateToken(newAdmin._id);
@@ -39,7 +39,15 @@ export const loginAdmin = async (req, res) => {
     if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
 
     const token = generateToken(admin._id);
-    res.json({ token, email: admin.email });
+    res.json({ 
+      token, 
+      user: {
+        email: admin.email,
+        firstname: admin.firstname,
+        lastname: admin.lastname,
+        _id: admin._id
+      }
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

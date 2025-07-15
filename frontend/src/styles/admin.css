@@ -122,4 +122,26 @@ button {
   font-size: 1rem !important;
   font-weight: 400;
 }
+
+.table thead tr th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  color: var(--red);
+}
+
+.table-container {
+  max-height: 350px; /* Adjust height as needed */
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 12px;
+  border: 1px solid #8b8c8d;
+}
 /* END Admin CSS */

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router-dom';
@@ -8,8 +8,19 @@ function AdminNavbar() {
   const navigate = useNavigate();
   const { logout } = useAdminAuth();
 
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userInfo = JSON.parse(sessionStorage.getItem('admin_login'));
+    if (userInfo) {
+      setUser(userInfo);
+    }
+  }, []);
+
   const handleLogout = () => {
-    localStorage.removeItem('admin_token');
+    sessionStorage.removeItem('admin_token');
+    sessionStorage.removeItem('admin_login');
+    sessionStorage.clear();
     logout();
     navigate('/mystore/admin/login');
   };
@@ -23,7 +34,7 @@ function AdminNavbar() {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ms-auto align-items-center">
           <Nav.Item className="d-flex align-items-center gap-2 text-white">
-            <span>Kevin Macandog</span>
+            <span>{user?.firstname} {user?.lastname}</span>
             <i
               className="bi bi-box-arrow-right fs-5 cursor-pointer"
               onClick={handleLogout}

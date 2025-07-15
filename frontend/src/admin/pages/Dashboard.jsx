@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 
 const Dashboard = () => {
   return (
-    <Container >
+    <Container fluid>
       <h1>Admin Dashboard</h1>
     </Container>
   )
