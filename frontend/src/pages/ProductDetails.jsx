@@ -1,103 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
-
-const products = [
-  {
-    id: 1,
-    name: 'Wireless Headphone',
-    price: 1499,
-    image: '/assets/images/headphone.jpg',
-    description: 'High-quality wireless headphone with long battery life.',
-  },
-  {
-    id: 2,
-    name: 'Bluetooth Speaker',
-    price: 999,
-    image: '/assets/images/speaker.jpg',
-    description: 'Portable Bluetooth speaker with rich bass.',
-  },
-  {
-    id: 3,
-    name: 'Smart Watch',
-    price: 2299,
-    image: '/assets/images/watch.jpg',
-    description: 'Smart watch with fitness tracker and notification alerts.',
-  },
-  {
-    id: 4,
-    name: 'Gaming Mouse',
-    price: 799,
-    image: '/assets/images/mouse.jpg',
-    description: 'Ergonomic mouse with RGB lighting for gaming.',
-  },
-  {
-    id: 5,
-    name: 'Java book',
-    price: 799,
-    image: '/assets/images/book.jpg',
-    description: 'Comprehensive guide to Java programming.',
-  },
-  {
-    id: 6,
-    name: 'Fashion men',
-    price: 799,
-    image: '/assets/images/fashion.jpg',
-    description: 'Stylish and comfortable gaming mouse with customizable buttons.',
-  },
-  {
-    id: 7,
-    name: 'Bike',
-    price: 799,
-    image: '/assets/images/bike.jpg',
-    description: 'High-performance bike for city commuting and fitness.',
-  },
-  {
-    id: 8,
-    name: 'Camera',
-    price: 799,
-    image: '/assets/images/camera.jpg',
-    description: 'High-resolution camera with 4K video recording capabilities.',
-  },
-  {
-    id: 9,
-    name: 'Cellphone',
-    price: 799,
-    image: '/assets/images/cellphone.jpg',
-    description: 'Latest smartphone with advanced features and sleek design.',
-  },
-  {
-    id: 10,
-    name: 'Dress',
-    price: 799,
-    image: '/assets/images/dress.jpg',
-    description: 'Elegant dress for special occasions.',
-  },
-  {
-    id: 11,
-    name: 'Laptop',
-    price: 799,
-    image: '/assets/images/laptop.jpg',
-    description: 'Powerful laptop with high performance for gaming and work.',
-  },
-  {
-    id: 12,
-    name: 'Short',
-    price: 799,
-    image: '/assets/images/short.jpg',
-    description: 'Comfortable shorts for casual wear.',
-  },
-];
+import { useProduct } from '../context/productContext';
 
 const ProductDetails = () => {
+  const [product, setProduct] = useState([]);
+
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const product = products.find(p => p.id === parseInt(id));
-
+  
   const { addToCart } = useCart();
 
+  const { getProducts } = useProduct();
+  const getProductList = async () => {
+    try {
+      const data = await getProducts();
+      const findProduct = data?.find(prod => prod?._id === id);
+      setProduct(findProduct);
+      // console.log(findProduct);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    getProductList();
+  }, []);
+  
   if (!product) {
     return (
       <Container className="text-center my-5">
@@ -111,13 +41,13 @@ const ProductDetails = () => {
     <Container className="my-5">
       <Row>
         <Col md={6}>
-          <Image src={product.image} alt={product.name} fluid rounded />
+          <Image src={product?.image} alt={product?.name} fluid rounded />
         </Col>
         <Col md={6}>
-          <h2>{product.name}</h2>
-          <h4 className="text-muted mb-3">₱{product.price.toLocaleString()}</h4>
-          <p>{product.description}</p>
-          <Button variant="primary" onClick={() => addToCart({id:product.id, name:product.name, price:product.price, image:product.image })}>
+          <h2>{product?.name}</h2>
+          <h4 className="text-muted mb-3">₱{product?.price}</h4>
+          <p>{product?.description}</p>
+          <Button variant="primary" onClick={() => addToCart({id:product?._id, name:product?.name, price:product?.price, image:product?.image })}>
             Add to Cart
           </Button>
         </Col>

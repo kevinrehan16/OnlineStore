@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'react-bootstrap/Image';
 
-const ProductRow = ({ product, index }) => {
+const ProductRow = ({ product, index, selectedProduct, rateProduct }) => {
   
   return (
     <tr className="align-middle">
@@ -16,8 +16,11 @@ const ProductRow = ({ product, index }) => {
       <td>{product.category}</td>
       <td className="text-center">{product.stock}</td>
       <td className="text-center">
-        <button className="btn btn-sm btn-primary me-1">
+        <button className="btn btn-sm btn-primary me-1" onClick={()=>selectedProduct(product)}>
           <i className="bi bi-pencil-square"></i>
+        </button>
+        <button className="btn btn-sm btn-success me-1" onClick={()=>rateProduct(product)}>
+          <i className="bi bi-star"></i>
         </button>
         <button className="btn btn-sm btn-warning text-white">
           <i className="bi bi-trash"></i>

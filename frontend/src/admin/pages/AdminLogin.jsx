@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Logo from '../../assets/logo.png'
 import { useAdminAuth } from '../context/AdminAuthContext';
+import { API_URL } from '../../config';
 
 const AdminLogin = () => {
-  const API_URL = import.meta.env.VITE_API_URL;
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

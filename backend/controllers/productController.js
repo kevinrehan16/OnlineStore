@@ -17,17 +17,49 @@ export const productSchemaWithId = productSchema.keys({
 
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.aggregate([
+      {
+        $lookup: {
+          from: "rates", // collection name in MongoDB (make sure it's plural if your model is "Rate")
+          localField: "_id",
+          foreignField: "product_id",
+          as: "ratings"
+        }
+      },
+      {
+        $addFields: {
+          totalRating: { $sum: "$ratings.rateValue" },
+          averageRating: { $avg: "$ratings.rateValue" },
+          ratingCount: { $size: "$ratings" }
+        }
+      },
+      {
+        $project: {
+          ratings: 0 // hide raw ratings array if you don’t need it
+        }
+      },
+      {
+        $sort: { _id: -1 }
+      }
+    ]);
+
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
+
 export const saveProduct = async (req, res) => {
-  const { error, value } = productSchema.validate(req.body);
+  const { error, value } = productSchema.validate(req.body, { abortEarly: false });
+
   if (error) {
-    return res.status(400).json({ message: error.details[0].message });
+    const errors = {};
+    error.details.forEach(detail => {
+      const field = detail.path[0]; // e.g., "name", "price"
+      errors[field] = detail.message.replace(/['"]+/g, '');
+    });
+    return res.status(400).json({ errors });
   }
 
   try {

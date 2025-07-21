@@ -61,6 +61,16 @@
   color: var(--red);
 }
 
+.nav-name .nav-link {
+  color: var(--light) !important;
+}
+
+.nav-name .dropdown-menu[data-bs-popper] {
+  border-radius: 0px;
+  left: -35px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -118,6 +128,9 @@ input {
 }
 
 button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 0 !important;
   font-size: 1rem !important;
   font-weight: 400;

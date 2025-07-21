@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Card, Form, InputGroup, Button  } from 'react-bootstrap'
 import ProductTable from '../components/products/ProductTable'
 import axios from 'axios';
+import ProductModal from '../components/products/ProductModal';
+import RateModal from '../components/products/RateModal';
+import { API_URL } from '../../config';
 
 const Products = () => {
-  const API_URL = import.meta.env.VITE_API_URL;
   const [productsList, setProductsList] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [modalRateShow, setModalRateShow] = useState(false);
+  const [savingType, setSavingType] = useState("insert");
+  const [productInfo, setProductInfo] = useState([]);
 
   useEffect(() => {
     getProducts();
@@ -19,9 +25,45 @@ const Products = () => {
       console.error('Error fetching products:', error);
     }
   }
+
+  const addModalProduct = () => {
+    setSavingType("insert");
+    setModalShow(true);
+    setProductInfo({
+      name: "",
+      description: "",
+      price: 0.00,
+      stock: 0,
+      category: "",
+      image: ""
+    })
+  }
+
+  const editModalProduct = (prodInfo) => {
+    setSavingType("update");
+    setModalShow(true);
+    setProductInfo({
+      _id: prodInfo._id,
+      name: prodInfo.name,
+      description: prodInfo.description,
+      price: prodInfo.price,
+      stock: prodInfo.stock,
+      category: prodInfo.category,
+      image: prodInfo.image
+    })
+  }
+
+  const rateProduct = (prodInfo) => {
+    setModalRateShow(true);
+    console.log(prodInfo);
+  }
   
   return (
     <Container className="my-3" fluid>
+      <ProductModal refreshTableProducts={getProducts} show={modalShow} handleClose={()=>setModalShow(false)} productInfo={productInfo} savingType={savingType}></ProductModal>
+
+      <RateModal show={modalRateShow} handleClose={()=>setModalRateShow(false)}></RateModal>
+      
       <Row>
         <Col>
           <h3 className='module-title'>
@@ -47,7 +89,7 @@ const Products = () => {
                   </InputGroup>
                 </Col>
                 <Col md={9}>
-                  <Button variant="primary" className='float-end'>
+                  <Button variant="primary" className='float-end' onClick={()=>addModalProduct()}>
                     <i className="bi bi-plus-lg"></i> Add Product
                   </Button>
                 </Col>
@@ -66,7 +108,7 @@ const Products = () => {
               </span>
             </Card.Header>
             <Card.Body>
-              <ProductTable products={productsList} />
+              <ProductTable products={productsList} thisProduct={editModalProduct} rateThisProduct={rateProduct}/>
             </Card.Body>
           </Card>
         </Col>
